@@ -60,7 +60,7 @@
 <div class="box">
 
     <!-- LOGO -->
-    <img src="https://drive.google.com/uc?export=download&id=12gaA0Ezci4WwP_ai5ZFDL7PH8xlb1Mj2" alt="Institution Logo">
+    <img src="https://drive.google.com/uc?export=view&id=12gaA0Ezci4WwP_ai5ZFDL7PH8xlb1Mj2" alt="Institution Logo">
 
     <h2>Attendance Portal</h2>
 
@@ -74,7 +74,7 @@
 
 <script>
 
-const WEB_APP_URL = "https://script.google.com/macros/s/AKfycbwS4jjUe6NfFgfRtnXP5CjFgXkHqZXEtDnViTzb9YyFhUnHGC-7E7aJBjqzAMXBeEkNPw/exec";
+const WEB_APP_URL = "https://script.google.com/macros/s/AKfycbwS4jjUe6NfFgfRtnXP5CjFgXkHqZXEtDnViTzb9YyFhUnHGC-7E7aJBjqzAMXBeEkNPw/exec"; // paste your Apps Script URL
 
 async function searchAttendance() {
 
@@ -104,8 +104,8 @@ async function searchAttendance() {
 
             let value = data[key];
 
-            // If key contains "percent", round to 2 decimal
-            if (key.toLowerCase().includes("percent")) {
+            // If column contains % symbol
+            if (key.includes("%") && !isNaN(value)) {
                 value = parseFloat(value).toFixed(2) + " %";
             }
 
@@ -126,4 +126,3 @@ async function searchAttendance() {
 
 </body>
 </html>
-
