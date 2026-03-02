@@ -129,7 +129,7 @@ async function searchAttendance() {
 
             // Round percentage columns
             if (key.includes("%") && !isNaN(value)) {
-                value = parseFloat(value).toFixed(2) + " %";
+                value = parseFloat(value).toFixed(2);
             }
 
             output += `
@@ -161,3 +161,4 @@ considered as final. For any further clarification contact MBA Office.
 
 </body>
 </html>
+
