@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Block One Attendance Portal</title>
+    <style>
+        body {
+            font-family: Arial;
+            background-color: #f2f4f8;
+            text-align: center;
+        }
+
+        .box {
+            width: 600px;
+            margin: 60px auto;
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+
+        img {
+            width: 120px;
+            margin-bottom: 15px;
+        }
+
+        input {
+            padding: 10px;
+            width: 80%;
+            margin-bottom: 15px;
+        }
+
+        button {
+            padding: 10px 20px;
+            background: #003366;
+            color: white;
+            border: none;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+
+        button:hover {
+            background: #0055aa;
+        }
+
+        .row {
+            text-align: left;
+            padding: 6px 0;
+            border-bottom: 1px solid #eee;
+        }
+
+        .error {
+            color: red;
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="box">
+
+    <!-- Google Drive Logo -->
+    <img src="https://drive.google.com/uc?export=view&id=12gaA0Ezci4WwP_ai5ZFDL7PH8xlb1Mj2" alt="Institution Logo">
+
+    <h2>Block One Attendance Portal</h2>
+
+    <input type="text" id="usnInput" placeholder="Enter USN">
+    <br>
+    <button onclick="searchAttendance()">Search</button>
+
+    <div id="result"></div>
+
+</div>
+
+<script>
+
+const WEB_APP_URL = "YOUR_WEB_APP_URL";
+
+async function searchAttendance() {
+
+    const usn = document.getElementById("usnInput").value.trim();
+    const resultDiv = document.getElementById("result");
+
+    if (!usn) {
+        resultDiv.innerHTML = "<p class='error'>Please enter USN</p>";
+        return;
+    }
+
+    resultDiv.innerHTML = "Loading...";
+
+    try {
+
+        const response = await fetch(`${WEB_APP_URL}?usn=${usn}`);
+        const data = await response.json();
+
+        if (data.error) {
+            resultDiv.innerHTML = `<p class='error'>${data.error}</p>`;
+            return;
+        }
+
+        let output = "";
+
+        for (let key in data) {
+            output += `
+                <div class="row">
+                    <strong>${key}:</strong> ${data[key]}
+                </div>
+            `;
+        }
+
+        resultDiv.innerHTML = output;
+
+    } catch (error) {
+        resultDiv.innerHTML = "<p class='error'>Error fetching attendance</p>";
+    }
+}
+</script>
+
+</body>
+</html>
