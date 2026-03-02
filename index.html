@@ -19,7 +19,7 @@
         }
 
         img {
-            width: 120px;
+            width: 140px;
             margin-bottom: 15px;
         }
 
@@ -50,6 +50,7 @@
 
         .error {
             color: red;
+            margin-top: 10px;
         }
     </style>
 </head>
@@ -58,8 +59,8 @@
 
 <div class="box">
 
-    <!-- Google Drive Logo -->
-    <img src="https://drive.google.com/uc?export=view&id=12gaA0Ezci4WwP_ai5ZFDL7PH8xlb1Mj2" alt="Institution Logo">
+    <!-- LOGO -->
+    <img src="https://drive.google.com/uc?export=download&id=12gaA0Ezci4WwP_ai5ZFDL7PH8xlb1Mj2" alt="Institution Logo">
 
     <h2>Block One Attendance Portal</h2>
 
@@ -77,7 +78,7 @@ const WEB_APP_URL = "https://script.google.com/macros/s/AKfycbwS4jjUe6NfFgfRtnXP
 
 async function searchAttendance() {
 
-    const usn = document.getElementById("usnInput").value.trim();
+    const usn = document.getElementById("usnInput").value.trim().toUpperCase();
     const resultDiv = document.getElementById("result");
 
     if (!usn) {
@@ -100,9 +101,17 @@ async function searchAttendance() {
         let output = "";
 
         for (let key in data) {
+
+            let value = data[key];
+
+            // If key contains "percent", round to 2 decimal
+            if (key.toLowerCase().includes("percent")) {
+                value = parseFloat(value).toFixed(2) + " %";
+            }
+
             output += `
                 <div class="row">
-                    <strong>${key}:</strong> ${data[key]}
+                    <strong>${key}:</strong> ${value}
                 </div>
             `;
         }
@@ -116,5 +125,4 @@ async function searchAttendance() {
 </script>
 
 </body>
-
 </html>
