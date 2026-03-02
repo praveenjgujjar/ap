@@ -10,17 +10,18 @@
         }
 
         .box {
-            width: 600px;
+            width: 650px;
             margin: 60px auto;
             background: white;
-            padding: 30px;
-            border-radius: 10px;
+            padding: 35px;
+            border-radius: 12px;
             box-shadow: 0 4px 12px rgba(0,0,0,0.1);
         }
 
+        /* Bigger Logo */
         img {
-            width: 140px;
-            margin-bottom: 15px;
+            width: 220px;   /* increased size */
+            margin-bottom: 20px;
         }
 
         h2 {
@@ -36,12 +37,13 @@
         }
 
         button {
-            padding: 10px 20px;
+            padding: 10px 25px;
             background: #003366;
             color: white;
             border: none;
             cursor: pointer;
             border-radius: 5px;
+            font-weight: bold;
         }
 
         button:hover {
@@ -50,7 +52,7 @@
 
         .row {
             text-align: left;
-            padding: 6px 0;
+            padding: 8px 0;
             border-bottom: 1px solid #eee;
         }
 
@@ -60,7 +62,18 @@
         }
 
         .success {
-            margin-top: 15px;
+            margin-top: 20px;
+            text-align: left;
+        }
+
+        .disclaimer {
+            margin-top: 20px;
+            font-size: 13px;
+            color: #555;
+            background: #f9f9f9;
+            padding: 12px;
+            border-radius: 6px;
+            border: 1px solid #eee;
         }
     </style>
 </head>
@@ -69,10 +82,10 @@
 
 <div class="box">
 
-    <!-- Local GitHub Logo -->
+    <!-- Bigger Logo -->
     <img src="logo.png" alt="Institution Logo">
 
-    <h2>Studence Attendance</h2>
+    <h2>Student Attendance</h2>
 
     <input type="text" id="usnInput" placeholder="Enter USN">
     <br>
@@ -128,6 +141,15 @@ async function searchAttendance() {
 
         output += "</div>";
 
+        // Add Disclaimer
+        output += `
+            <div class="disclaimer">
+                <strong>Disclaimer:</strong> 
+               The attendance published here is for immediate information to the students and cannot be
+considered as final. For any further clarification contact MBA Office.
+            </div>
+        `;
+
         resultDiv.innerHTML = output;
 
     } catch (error) {
@@ -139,4 +161,3 @@ async function searchAttendance() {
 
 </body>
 </html>
-
