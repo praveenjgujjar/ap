@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Block One Attendance Portal</title>
+    <title>Attendance Portal</title>
     <style>
         body {
-            font-family: Arial;
+            font-family: Arial, sans-serif;
             background-color: #f2f4f8;
             text-align: center;
         }
@@ -23,10 +23,16 @@
             margin-bottom: 15px;
         }
 
+        h2 {
+            margin-bottom: 20px;
+        }
+
         input {
             padding: 10px;
             width: 80%;
             margin-bottom: 15px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
         }
 
         button {
@@ -52,6 +58,10 @@
             color: red;
             margin-top: 10px;
         }
+
+        .success {
+            margin-top: 15px;
+        }
     </style>
 </head>
 
@@ -59,8 +69,8 @@
 
 <div class="box">
 
-    <!-- LOGO -->
-    <img src="https://drive.google.com/uc?export=view&id=12gaA0Ezci4WwP_ai5ZFDL7PH8xlb1Mj2" alt="Institution Logo">
+    <!-- Local GitHub Logo -->
+    <img src="logo.png" alt="Institution Logo">
 
     <h2>Attendance Portal</h2>
 
@@ -74,7 +84,7 @@
 
 <script>
 
-const WEB_APP_URL = "https://script.google.com/macros/s/AKfycbwS4jjUe6NfFgfRtnXP5CjFgXkHqZXEtDnViTzb9YyFhUnHGC-7E7aJBjqzAMXBeEkNPw/exec"; // paste your Apps Script URL
+const WEB_APP_URL = "https://script.google.com/macros/s/AKfycbwS4jjUe6NfFgfRtnXP5CjFgXkHqZXEtDnViTzb9YyFhUnHGC-7E7aJBjqzAMXBeEkNPw/exec";
 
 async function searchAttendance() {
 
@@ -98,13 +108,13 @@ async function searchAttendance() {
             return;
         }
 
-        let output = "";
+        let output = "<div class='success'>";
 
         for (let key in data) {
 
             let value = data[key];
 
-            // If column contains % symbol
+            // Round percentage columns
             if (key.includes("%") && !isNaN(value)) {
                 value = parseFloat(value).toFixed(2) + " %";
             }
@@ -116,12 +126,15 @@ async function searchAttendance() {
             `;
         }
 
+        output += "</div>";
+
         resultDiv.innerHTML = output;
 
     } catch (error) {
         resultDiv.innerHTML = "<p class='error'>Error fetching attendance</p>";
     }
 }
+
 </script>
 
 </body>
